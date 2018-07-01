@@ -96,17 +96,18 @@ namespace Nuke.Common.Execution
             foreach (var executable in executables)
             {
                 var dependencies = dependencyDictionary[executable];
-                
-                foreach (var shadowDependencyName in executable.Definition.ShadowTargetDependencies)
+
+                foreach (var factoryDependency in executable.Definition.FactoryDependencies)
                 {
-                    var shadowDependency = executables.SingleOrDefault(x => x.Name.EqualsOrdinalIgnoreCase(shadowDependencyName));
-                    if (shadowDependency != null)
-                        dependencies.Add(shadowDependency);
+                    var dependency = executables.Single(x => x.Factory == factoryDependency);
+                    dependencies.Add(dependency);
                 }
 
-                foreach (var symbolDependencyFactory in executable.Definition.TargetDependencies)
+                foreach (var nameDependency in executable.Definition.NameDependencies)
                 {
-                    dependencies.Add(executables.Single(x => x.Factory == symbolDependencyFactory));
+                    var dependency = executables.SingleOrDefault(x => x.Name.EqualsOrdinalIgnoreCase(nameDependency));
+                    if (dependency != null)
+                        dependencies.Add(dependency);
                 }
             }
 
