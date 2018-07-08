@@ -10,7 +10,7 @@ using JetBrains.Annotations;
 using Nuke.Common.IO;
 using Xunit;
 
-namespace Nuke.Common.Tests
+namespace Nuke.Common.Tests.Tooling
 {
     public class SerializationTest
     {

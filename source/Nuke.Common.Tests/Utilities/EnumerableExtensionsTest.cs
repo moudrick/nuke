@@ -8,7 +8,7 @@ using FluentAssertions;
 using Nuke.Common.Utilities.Collections;
 using Xunit;
 
-namespace Nuke.Common.Tests
+namespace Nuke.Common.Tests.Utilities
 {
     public class EnumerableExtensionsTest
     {

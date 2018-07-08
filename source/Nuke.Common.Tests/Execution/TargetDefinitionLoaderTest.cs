@@ -4,13 +4,11 @@
 
 using System;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
 using FluentAssertions;
 using Nuke.Common.Execution;
 using Xunit;
 
-namespace Nuke.Common.Tests
+namespace Nuke.Common.Tests.Execution
 {
     public class TargetDefinitionLoaderTest
     {

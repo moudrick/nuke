@@ -8,7 +8,7 @@ using FluentAssertions;
 using Nuke.Common.Utilities;
 using Xunit;
 
-namespace Nuke.Common.Tests
+namespace Nuke.Common.Tests.Utilities
 {
     public class StringExtensionsTest
     {

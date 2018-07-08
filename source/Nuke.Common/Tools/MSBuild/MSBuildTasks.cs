@@ -9,6 +9,7 @@ using Nuke.Common.Tools.GitVersion;
 using Nuke.Common.BuildServers;
 using Nuke.Common.IO;
 using Nuke.Common.Tooling;
+using Nuke.Common.Utilities.Collections;
 
 namespace Nuke.Common.Tools.MSBuild
 {

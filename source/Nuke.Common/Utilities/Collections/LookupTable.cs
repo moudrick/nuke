@@ -7,9 +7,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
-using Nuke.Common.Utilities.Collections;
 
-namespace Nuke.Common.Tooling
+namespace Nuke.Common.Utilities.Collections
 {
     [PublicAPI]
     [Serializable]
@@ -23,7 +22,7 @@ namespace Nuke.Common.Tooling
         }
 
         public LookupTable(ILookup<TKey, TValue> lookupTable, IEqualityComparer<TKey> comparer = null)
-            : this(lookupTable.ToDictionary(x => x.Key, x => x.ToList(), comparer))
+            : this(Enumerable.ToDictionary(lookupTable, x => x.Key, x => x.ToList(), comparer))
         {
         }
 

@@ -6,14 +6,14 @@ using System;
 using System.IO;
 using System.Linq;
 using FluentAssertions;
+using Nuke.Common.IO;
+using Nuke.Common.Tooling;
 using Nuke.Common.Tools.MSBuild;
 using Nuke.Common.Tools.OpenCover;
 using Nuke.Common.Tools.Xunit;
-using Nuke.Common.IO;
-using Nuke.Common.Tooling;
 using Xunit;
 
-namespace Nuke.Common.Tests
+namespace Nuke.Common.Tests.Tooling
 {
     public class SettingsTest
     {
