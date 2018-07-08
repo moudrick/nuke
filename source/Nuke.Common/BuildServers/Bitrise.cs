@@ -3,6 +3,7 @@
 // https://github.com/nuke-build/nuke/blob/master/LICENSE
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using JetBrains.Annotations;
 using static Nuke.Common.EnvironmentInfo;
@@ -14,6 +15,7 @@ namespace Nuke.Common.BuildServers
     /// </summary>
     [PublicAPI]
     [BuildServer]
+    [ExcludeFromCodeCoverage]
     public class Bitrise
     {
         private static Lazy<Bitrise> s_instance = new Lazy<Bitrise>(() => new Bitrise());
@@ -25,7 +27,7 @@ namespace Nuke.Common.BuildServers
         private static DateTime ConvertUnixTimestamp(long timestamp)
         {
             return new DateTime(year: 1970, month: 1, day: 1, hour: 0, minute: 0, second: 0, kind: DateTimeKind.Utc)
-                .AddSeconds(value: 1501444668)
+                .AddSeconds(timestamp)
                 .ToLocalTime();
         }
 

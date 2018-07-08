@@ -6,6 +6,7 @@
 // Generated from https://github.com/nuke-build/nuke/blob/master/build/specifications/InspectCode.json.
 
 using JetBrains.Annotations;
+using Newtonsoft.Json;
 using Nuke.Common;
 using Nuke.Common.Execution;
 using Nuke.Common.Tooling;
@@ -526,6 +527,7 @@ namespace Nuke.Common.Tools.InspectCode
     /// <summary><p>Used within <see cref="InspectCodeTasks"/>.</p></summary>
     [PublicAPI]
     [Serializable]
+    [ExcludeFromCodeCoverage]
     public partial class InspectCodeSettingsLayers : Enumeration
     {
         public static InspectCodeSettingsLayers GlobalAll = new InspectCodeSettingsLayers { Value = "GlobalAll" };
@@ -538,6 +540,7 @@ namespace Nuke.Common.Tools.InspectCode
     /// <summary><p>Used within <see cref="InspectCodeTasks"/>.</p></summary>
     [PublicAPI]
     [Serializable]
+    [ExcludeFromCodeCoverage]
     public partial class InspectCodeMSBuildToolset : Enumeration
     {
         public static InspectCodeMSBuildToolset _12_0 = new InspectCodeMSBuildToolset { Value = "12.0" };

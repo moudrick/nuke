@@ -6,6 +6,7 @@
 // Generated from https://github.com/nuke-build/nuke/blob/master/build/specifications/Npm.json.
 
 using JetBrains.Annotations;
+using Newtonsoft.Json;
 using Nuke.Common;
 using Nuke.Common.Execution;
 using Nuke.Common.Tooling;
@@ -752,6 +753,7 @@ namespace Nuke.Common.Tools.Npm
     /// <summary><p>Used within <see cref="NpmTasks"/>.</p></summary>
     [PublicAPI]
     [Serializable]
+    [ExcludeFromCodeCoverage]
     public partial class NpmOnlyMode : Enumeration
     {
         public static NpmOnlyMode production = new NpmOnlyMode { Value = "production" };

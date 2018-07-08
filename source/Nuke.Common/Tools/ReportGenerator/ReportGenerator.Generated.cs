@@ -6,6 +6,7 @@
 // Generated from https://github.com/nuke-build/nuke/blob/master/build/specifications/ReportGenerator.json.
 
 using JetBrains.Annotations;
+using Newtonsoft.Json;
 using Nuke.Common;
 using Nuke.Common.Execution;
 using Nuke.Common.Tooling;
@@ -542,6 +543,7 @@ namespace Nuke.Common.Tools.ReportGenerator
     /// <summary><p>Used within <see cref="ReportGeneratorTasks"/>.</p></summary>
     [PublicAPI]
     [Serializable]
+    [ExcludeFromCodeCoverage]
     public partial class ReportTypes : Enumeration
     {
         public static ReportTypes Badges = new ReportTypes { Value = "Badges" };
@@ -563,6 +565,7 @@ namespace Nuke.Common.Tools.ReportGenerator
     /// <summary><p>Used within <see cref="ReportGeneratorTasks"/>.</p></summary>
     [PublicAPI]
     [Serializable]
+    [ExcludeFromCodeCoverage]
     public partial class ReportGeneratorVerbosity : Enumeration
     {
         public static ReportGeneratorVerbosity Off = new ReportGeneratorVerbosity { Value = "Off" };

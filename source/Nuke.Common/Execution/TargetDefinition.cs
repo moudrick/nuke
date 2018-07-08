@@ -20,7 +20,8 @@ namespace Nuke.Common.Execution
         internal List<Target> TargetDependencies { get; } = new List<Target>();
         internal List<string> ShadowTargetDependencies { get; } = new List<string>();
         internal List<Action> Actions { get; } = new List<Action>();
-
+        internal DependencyBehavior DependencyBehavior { get; private set; }
+        
         ITargetDefinition ITargetDefinition.Description(string description)
         {
             Description = description;
@@ -78,6 +79,12 @@ namespace Nuke.Common.Execution
         public ITargetDefinition Requires(params Expression<Func<bool>>[] requirement)
         {
             Requirements.AddRange(requirement);
+            return this;
+        }
+
+        public ITargetDefinition WhenSkipped(DependencyBehavior dependencyBehavior)
+        {
+            DependencyBehavior = dependencyBehavior;
             return this;
         }
     }

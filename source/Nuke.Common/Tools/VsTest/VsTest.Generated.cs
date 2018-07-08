@@ -6,6 +6,7 @@
 // Generated from https://github.com/nuke-build/nuke/blob/master/build/specifications/VsTest.json.
 
 using JetBrains.Annotations;
+using Newtonsoft.Json;
 using Nuke.Common;
 using Nuke.Common.Execution;
 using Nuke.Common.Tooling;
@@ -755,6 +756,7 @@ namespace Nuke.Common.Tools.VsTest
     /// <summary><p>Used within <see cref="VsTestTasks"/>.</p></summary>
     [PublicAPI]
     [Serializable]
+    [ExcludeFromCodeCoverage]
     public partial class VsTestPlatform : Enumeration
     {
         public static VsTestPlatform x86 = new VsTestPlatform { Value = "x86" };
@@ -766,6 +768,7 @@ namespace Nuke.Common.Tools.VsTest
     /// <summary><p>Used within <see cref="VsTestTasks"/>.</p></summary>
     [PublicAPI]
     [Serializable]
+    [ExcludeFromCodeCoverage]
     public partial class VsTestFramework : Enumeration
     {
         public static VsTestFramework Framework35 = new VsTestFramework { Value = "Framework35" };

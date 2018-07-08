@@ -6,6 +6,7 @@
 // Generated from https://github.com/nuke-build/nuke/blob/master/build/specifications/DocFx.json.
 
 using JetBrains.Annotations;
+using Newtonsoft.Json;
 using Nuke.Common;
 using Nuke.Common.Execution;
 using Nuke.Common.Tooling;
@@ -524,6 +525,7 @@ namespace Nuke.Common.Tools.DocFx
     /// <summary><p>Used within <see cref="DocFxTasks"/>.</p></summary>
     [PublicAPI]
     [Serializable]
+    [ExcludeFromCodeCoverage]
     public partial class DocFxLogLevel : Enumeration
     {
         public static DocFxLogLevel Verbose = new DocFxLogLevel { Value = "Verbose" };

@@ -8,7 +8,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using Nuke.Common.BuildServers;
 using Nuke.Common.OutputSinks;
 using Nuke.Common.Utilities;
 
@@ -36,7 +35,7 @@ namespace Nuke.Common.Execution
                 s_injectionService.InjectValues(build);
                 HandleEarlyExits(build);
 
-                executingTargets = TargetDefinitionLoader.GetExecutingTargets(build);
+                executingTargets = TargetDefinitionLoader.GetExecutingTargets(build, build.InvokedTargets);
                 RequirementService.ValidateRequirements(executingTargets, build);
                 Execute(executingTargets);
                 
@@ -76,7 +75,7 @@ namespace Nuke.Common.Execution
                     continue;
                 }
 
-                if (target.Conditions.Any(x => !x()))
+                if (target.Skip || target.Conditions.Any(x => !x()))
                 {
                     target.Status = ExecutionStatus.Skipped;
                     continue;

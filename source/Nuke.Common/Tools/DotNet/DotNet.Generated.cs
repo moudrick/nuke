@@ -6,6 +6,7 @@
 // Generated from https://github.com/nuke-build/nuke/blob/master/build/specifications/DotNet.json.
 
 using JetBrains.Annotations;
+using Newtonsoft.Json;
 using Nuke.Common;
 using Nuke.Common.Execution;
 using Nuke.Common.Tooling;
@@ -4046,6 +4047,7 @@ namespace Nuke.Common.Tools.DotNet
     /// <summary><p>Used within <see cref="DotNetTasks"/>.</p></summary>
     [PublicAPI]
     [Serializable]
+    [ExcludeFromCodeCoverage]
     public partial class DotNetVerbosity : Enumeration
     {
         public static DotNetVerbosity Quiet = new DotNetVerbosity { Value = "Quiet" };

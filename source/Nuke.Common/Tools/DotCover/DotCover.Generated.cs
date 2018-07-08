@@ -6,6 +6,7 @@
 // Generated from https://github.com/nuke-build/nuke/blob/master/build/specifications/DotCover.json.
 
 using JetBrains.Annotations;
+using Newtonsoft.Json;
 using Nuke.Common;
 using Nuke.Common.Execution;
 using Nuke.Common.Tooling;
@@ -2260,6 +2261,7 @@ namespace Nuke.Common.Tools.DotCover
     /// <summary><p>Used within <see cref="DotCoverTasks"/>.</p></summary>
     [PublicAPI]
     [Serializable]
+    [ExcludeFromCodeCoverage]
     public partial class DotCoverReportType : Enumeration
     {
         public static DotCoverReportType Html = new DotCoverReportType { Value = "Html" };

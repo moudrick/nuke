@@ -6,6 +6,7 @@
 // Generated from https://github.com/nuke-build/nuke/blob/master/build/specifications/SignTool.json.
 
 using JetBrains.Annotations;
+using Newtonsoft.Json;
 using Nuke.Common;
 using Nuke.Common.Execution;
 using Nuke.Common.Tooling;
@@ -1451,6 +1452,7 @@ namespace Nuke.Common.Tools.SignTool
     /// <summary><p>Used within <see cref="SignToolTasks"/>.</p></summary>
     [PublicAPI]
     [Serializable]
+    [ExcludeFromCodeCoverage]
     public partial class SignToolContentMethod : Enumeration
     {
         public static SignToolContentMethod Embedded = new SignToolContentMethod { Value = "Embedded" };

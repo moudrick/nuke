@@ -6,6 +6,7 @@
 // Generated from https://github.com/nuke-build/nuke/blob/master/build/specifications/Octopus.json.
 
 using JetBrains.Annotations;
+using Newtonsoft.Json;
 using Nuke.Common;
 using Nuke.Common.Execution;
 using Nuke.Common.Tooling;
@@ -3357,6 +3358,7 @@ namespace Nuke.Common.Tools.Octopus
     /// <summary><p>Used within <see cref="OctopusTasks"/>.</p></summary>
     [PublicAPI]
     [Serializable]
+    [ExcludeFromCodeCoverage]
     public partial class OctopusPackFormat : Enumeration
     {
         public static OctopusPackFormat NuPkg = new OctopusPackFormat { Value = "NuPkg" };

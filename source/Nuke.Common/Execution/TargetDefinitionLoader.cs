@@ -6,25 +6,33 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using JetBrains.Annotations;
 using Nuke.Common.Utilities;
+using Nuke.Common.Utilities.Collections;
 
 namespace Nuke.Common.Execution
 {
     internal static class TargetDefinitionLoader
     {
-        public static IReadOnlyCollection<ExecutableTarget> GetExecutingTargets(NukeBuild build)
+        public static IReadOnlyCollection<ExecutableTarget> GetExecutingTargets(NukeBuild build, string[] invokedTargetNames = null)
         {
             ControlFlow.Assert(build.ExecutableTargets.All(x => !x.Name.EqualsOrdinalIgnoreCase(BuildExecutor.DefaultTarget)),
                 $"The name '{BuildExecutor.DefaultTarget}' cannot be used as target name.");
 
-            var invokedTargets = build.InvokedTargets.Select(x => GetExecutableTarget(x, build)).ToList();
+            var invokedTargets = invokedTargetNames?.Select(x => GetExecutableTarget(x, build)).ToList() ?? new List<ExecutableTarget>();
             var executingTargets = GetUnfilteredExecutingTargets(build, invokedTargets);
+
             var skippedTargets = executingTargets
                 .Where(x => !invokedTargets.Contains(x) &&
                             build.SkippedTargets != null &&
                             (build.SkippedTargets.Length == 0 ||
                              build.SkippedTargets.Contains(x.Name, StringComparer.OrdinalIgnoreCase))).ToList();
-            skippedTargets.ForEach(x => x.Conditions.Add(() => false));
+            skippedTargets.ForEach(x => x.Skip = true);
+            
+            executingTargets
+                .Where(x => x.Definition.DependencyBehavior == DependencyBehavior.Skip)
+                .Where(x => x.Conditions.Any(y => !y()))
+                .ForEach(x => SkipTargetAndDependencies(x, invokedTargets, executingTargets));
 
             string[] GetNames(IEnumerable<ExecutableTarget> targets)
                 => targets.Select(x => x.Name).ToArray();
@@ -34,6 +42,35 @@ namespace Nuke.Common.Execution
             ReflectionService.SetValue(build, nameof(NukeBuild.ExecutingTargets), GetNames(executingTargets.Except(skippedTargets)));
 
             return executingTargets;
+        }
+
+        private static void SkipTargetAndDependencies(
+            ExecutableTarget target,
+            IReadOnlyCollection<ExecutableTarget> invokedTargets,
+            IReadOnlyCollection<ExecutableTarget> executingTargets,
+            IDictionary<ExecutableTarget, List<ExecutableTarget>> skipRequestDictionary = null)
+        {
+            skipRequestDictionary = skipRequestDictionary ?? new Dictionary<ExecutableTarget, List<ExecutableTarget>>();
+            
+            target.Skip = true;
+            foreach (var dependency in target.Dependencies)
+            {
+                if (invokedTargets.Contains(dependency))
+                    continue;
+                
+                var skipRequests = skipRequestDictionary.GetValueOrDefault(dependency);
+                if (skipRequests == null)
+                    skipRequests = skipRequestDictionary[dependency] = new List<ExecutableTarget>();
+                
+                var executingDependentTargets = executingTargets
+                    .Where(x => x != target)
+                    .Where(x => x.Dependencies.Contains(dependency) && !skipRequests.Contains(x));
+                
+                if (executingDependentTargets.Any())
+                    skipRequests.Add(target);
+                else
+                    SkipTargetAndDependencies(dependency, invokedTargets, executingTargets, skipRequestDictionary);
+            }
         }
 
         private static ExecutableTarget GetExecutableTarget(

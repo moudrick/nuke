@@ -40,7 +40,8 @@ namespace Nuke.Common.Execution
         public IReadOnlyList<Action> Actions => Definition.Actions;
         public IReadOnlyList<ExecutableTarget> Dependencies { get; }
         public bool IsDefault { get; }
-
+        
+        public bool Skip { get; set; }
         public ExecutionStatus Status { get; set; }
         public TimeSpan Duration { get; set; }
 }
