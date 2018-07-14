@@ -38,6 +38,7 @@ using Nuke.Common.Tooling;
 using Nuke.Common.Tools.Slack;
 
 [assembly: IconClass(typeof(ChangelogTasks), "books")]
+[assembly: IconClass(typeof(CompressionTasks), "file-zip")]
 [assembly: IconClass(typeof(ControlFlow), "footprint")]
 [assembly: IconClass(typeof(CoverallsNetTasks), "pie-chart4")]
 [assembly: IconClass(typeof(DocFxTasks), "books")]
